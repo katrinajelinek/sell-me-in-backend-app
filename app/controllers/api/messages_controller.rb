@@ -1,5 +1,5 @@
 class Api::MessagesController < ApplicationController
-  before_action :authenticate_user, except: [:show]
+  before_action :authenticate_user
 
   def show
     @message = Message.find(params[:id])
