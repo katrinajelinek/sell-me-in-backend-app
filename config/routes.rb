@@ -22,5 +22,8 @@ Rails.application.routes.draw do
 
     # post_categories
     post "/post_categories" => "post_categories#create"
+
+    # messages
+    post "/messages" => "messages#create"
   end
 end
