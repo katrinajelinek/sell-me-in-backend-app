@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     post "/post_categories" => "post_categories#create"
 
     # messages
+    get "/messages/:id" => "messages#show"
     post "/messages" => "messages#create"
   end
 end

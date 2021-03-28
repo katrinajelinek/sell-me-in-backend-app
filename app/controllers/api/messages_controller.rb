@@ -1,5 +1,10 @@
 class Api::MessagesController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:show]
+
+  def show
+    @message = Message.find(params[:id])
+    render "show.json.jb"
+  end
 
   def create
     @message = Message.new(
