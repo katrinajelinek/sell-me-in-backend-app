@@ -3,4 +3,9 @@ class Api::CategoriesController < ApplicationController
     @categories = Category.all
     render "index.json.jb"
   end
+
+  def show
+    @category = Category.find(params[:id])
+    render "show.json.jb"
+  end
 end
