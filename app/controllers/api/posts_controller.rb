@@ -26,4 +26,18 @@ class Api::PostsController < ApplicationController
       render json: { errors: @post.errors.full_messages }, status: :bad_request
     end
   end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.title = params[:title] || @post.title
+    @post.description = params[:description] || @post.description
+    @post.video_url = params[:video_url] || @post.video_url
+    @post.price = params[:price] || @post.price
+    @post.location = params[:location] || @post.location
+    if @post.save
+      render "show.json.jb"
+    else
+      render json: { errors: @post.errors.full_messages }, status: :bad_request
+    end
+  end
 end
