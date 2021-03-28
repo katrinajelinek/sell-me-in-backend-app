@@ -1,1 +1,9 @@
-render partial: "user.json.jb", locals: { user: @user }
+user_hash = render partial: "user.json.jb", locals: { user: @user }
+user_hash[:posts] = @user.posts.map do |post|
+  post_hash = render partial: "/api/posts/post.json.jb", locals: { post: post }
+  post_hash[:categories] = post.categories.map do |category|
+    render partial: "api/categories/category.json.jb", locals: { category: category }
+  end
+  post_hash
+end
+user_hash
