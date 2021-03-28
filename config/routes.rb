@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
     # images
     post "/images" => "images#create"
+    delete "/images/:id" => "images#destroy"
   end
 end

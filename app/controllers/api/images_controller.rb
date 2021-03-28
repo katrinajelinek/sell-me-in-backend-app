@@ -12,4 +12,10 @@ class Api::ImagesController < ApplicationController
       render json: { errors: @image.errors.full_messages }, status: :bad_request
     end
   end
+
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    render json: { message: "Image destroyed" }
+  end
 end
