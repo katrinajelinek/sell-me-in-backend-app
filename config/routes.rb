@@ -15,5 +15,8 @@ Rails.application.routes.draw do
     # images
     post "/images" => "images#create"
     delete "/images/:id" => "images#destroy"
+
+    # categories
+    get "/categories" => "categories#index"
   end
 end
