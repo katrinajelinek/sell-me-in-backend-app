@@ -6,6 +6,6 @@ class User < ApplicationRecord
   validates :disclaimer_agreement, acceptance: true
   validates :terms_and_conditions_agreement, acceptance: true
 
-  has_many :messages
-  has_many :posts
+  has_many :messages, dependent: :destroy
+  has_many :posts, dependent: :destroy
 end
