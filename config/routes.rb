@@ -19,5 +19,8 @@ Rails.application.routes.draw do
     # categories
     get "/categories" => "categories#index"
     get "/categories/:id" => "categories#show"
+
+    # post_categories
+    post "/post_categories" => "post_categories#create"
   end
 end

@@ -1,0 +1,5 @@
+{
+  id: post_category.id,
+  post_id: post_category.post_id,
+  category_id: post_category.category_id,
+}
