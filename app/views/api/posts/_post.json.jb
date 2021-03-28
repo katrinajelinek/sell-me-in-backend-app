@@ -1,0 +1,9 @@
+{
+  id: post.id,
+  user_id: post.user_id,
+  title: post.title,
+  description: post.description,
+  video_url: post.video_url,
+  price: post.price,
+  location: post.location,
+}

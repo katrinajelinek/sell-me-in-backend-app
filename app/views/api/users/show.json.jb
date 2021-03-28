@@ -1,10 +1,1 @@
-{
-  id: @user.id,
-  username: @user.username,
-  first_name: @user.first_name,
-  last_name: @user.last_name,
-  email: @user.email,
-  image_url: @user.image_url,
-  disclaimer_agreement: @user.disclaimer_agreement,
-  terms_and_conditions_agreement: @user.terms_and_conditions_agreement,
-}
+render partial: "user.json.jb", locals: { user: @user }

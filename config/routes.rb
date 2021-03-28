@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     patch "/users/:id" => "users#update"
     delete "/users/:id" => "users#destroy"
 
+    # posts
+    resources :posts
+
     # login
     post "/sessions" => "sessions#create"
   end
