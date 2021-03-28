@@ -27,25 +27,21 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user == current_user
-      @user.username = params[:username] || @user.username
-      @user.first_name = params[:first_name] || @user.first_name
-      @user.last_name = params[:last_name] || @user.last_name
-      @user.email = params[:email] || @user.email
-      if params[:password]
-        if @user.authenticate(params[:old_password])
-          @user.update!(
-            password: params[:password],
-            password_confirmation: params[:password_confirmation],
-          )
-        end
+    @user.username = params[:username] || @user.username
+    @user.first_name = params[:first_name] || @user.first_name
+    @user.last_name = params[:last_name] || @user.last_name
+    @user.email = params[:email] || @user.email
+    if params[:password]
+      if @user.authenticate(params[:old_password])
+        @user.update!(
+          password: params[:password],
+          password_confirmation: params[:password_confirmation],
+        )
       end
-      @user.image_url = params[:image_url] || @user.image_url
-      @user.disclaimer_agreement = params[:disclaimer_agreement] || @user.disclaimer_agreement
-      @user.terms_and_conditions_agreement = params[:terms_and_conditions_agreement] || @user.terms_and_conditions_agreement
-    else
-      render json: {}, status: :forbidden
     end
+    @user.image_url = params[:image_url] || @user.image_url
+    @user.disclaimer_agreement = params[:disclaimer_agreement] || @user.disclaimer_agreement
+    @user.terms_and_conditions_agreement = params[:terms_and_conditions_agreement] || @user.terms_and_conditions_agreement
 
     if @user.save
       render "show.json.jb"
@@ -56,11 +52,7 @@ class Api::UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user == current_user
-      user.destroy
-      render json: { message: "Your account has been successfully deleted" }
-    else
-      render json: {}, status: :forbidden
-    end
+    user.destroy
+    render json: { message: "Your account has been successfully deleted" }
   end
 end
