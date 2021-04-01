@@ -2,6 +2,9 @@ category_hash = render partial: "category.json.jb", locals: { category: @categor
 category_hash[:posts] = @category.posts.map do |post|
   post_hash = render partial: "api/posts/post.json.jb", locals: { post: post }
   post_hash[:user] = { username: post.user.username }
+  post_hash[:categories] = post.categories.map do |category|
+    render partial: "api/categories/category.json.jb", locals: { category: category }
+  end
   post_hash
 end
 category_hash
