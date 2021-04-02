@@ -23,7 +23,7 @@ class Api::PostsController < ApplicationController
     if @post.save
       if params[:category_ids]
         #remove eval on frontend build
-        eval(params[:category_ids]).each do |category_id|
+        params[:category_ids].each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
         end
       end
@@ -44,7 +44,7 @@ class Api::PostsController < ApplicationController
       if params[:category_ids]
         @post.post_categories.destroy_all
         #remove eval on frontend build
-        eval(params[:category_ids]).each do |category_id|
+        params[:category_ids].each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
         end
       end
