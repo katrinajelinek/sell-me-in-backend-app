@@ -7,8 +7,10 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
-    cloudinary_url = response["secure_url"]
+    if params[:image]
+      response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
+      cloudinary_url = response["secure_url"]
+    end
     @user = User.new(
       username: params[:username],
       first_name: params[:first_name],
@@ -28,8 +30,10 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
-    cloudinary_url = response["secure_url"]
+    if params[:image]
+      response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
+      cloudinary_url = response["secure_url"]
+    end
     @user = User.find(params[:id])
     @user.username = params[:username] || @user.username
     @user.first_name = params[:first_name] || @user.first_name
