@@ -27,12 +27,6 @@ class Api::PostsController < ApplicationController
           PostCategory.create(post_id: @post.id, category_id: category_id)
         end
       end
-      if params[:images]
-        #remove eval on frontend build
-        eval(params[:images]).each do |image_url|
-          Image.create(post_id: @post.id, image_url: image_url)
-        end
-      end
       render "show.json.jb"
     else
       render json: { errors: @post.errors.full_messages }, status: :bad_request
@@ -52,12 +46,6 @@ class Api::PostsController < ApplicationController
         #remove eval on frontend build
         params[:category_ids].each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
-        end
-      end
-      if params[:images]
-        #remove eval on frontend build
-        eval(params[:images]).each do |image_url|
-          Image.create(post_id: @post.id, image_url: image_url)
         end
       end
       render "show.json.jb"
