@@ -7,12 +7,14 @@ class Api::UsersController < ApplicationController
   end
 
   def create
+    response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
+    cloudinary_url = response["secure_url"]
     @user = User.new(
       username: params[:username],
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
-      image_url: params[:image_url],
+      image_url: cloudinary_url,
       disclaimer_agreement: params[:disclaimer_agreement],
       terms_and_conditions_agreement: params[:terms_and_conditions_agreement],
       password: params[:password],
