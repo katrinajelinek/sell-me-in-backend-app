@@ -21,6 +21,12 @@ class Api::PostsController < ApplicationController
       location: params[:location],
     )
     if @post.save
+      if params[:category_ids]
+        #remove eval on frontend build
+        eval(params[:category_ids]).each do |category_id|
+          PostCategory.create(post_id: @post.id, category_id: category_id)
+        end
+      end
       render "show.json.jb"
     else
       render json: { errors: @post.errors.full_messages }, status: :bad_request
@@ -35,6 +41,13 @@ class Api::PostsController < ApplicationController
     @post.price = params[:price] || @post.price
     @post.location = params[:location] || @post.location
     if @post.save
+      if params[:category_ids]
+        @post.post_categories.destroy_all
+        #remove eval on frontend build
+        eval(params[:category_ids]).each do |category_id|
+          PostCategory.create(post_id: @post.id, category_id: category_id)
+        end
+      end
       render "show.json.jb"
     else
       render json: { errors: @post.errors.full_messages }, status: :bad_request
