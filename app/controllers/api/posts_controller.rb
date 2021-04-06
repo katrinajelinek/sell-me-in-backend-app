@@ -12,11 +12,15 @@ class Api::PostsController < ApplicationController
   end
 
   def create
+    if params[:video]
+      response = Cloudinary::Uploader.upload(params[:video], resource_type: :auto)
+      cloudinary_url = response["secure_url"]
+    end
     @post = Post.new(
       user_id: current_user.id,
       title: params[:title],
       description: params[:description],
-      video_url: params[:video_url],
+      video_url: cloudinary_url,
       price: params[:price],
       location: params[:location],
     )
@@ -37,7 +41,7 @@ class Api::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.title = params[:title] || @post.title
     @post.description = params[:description] || @post.description
-    @post.video_url = params[:video_url] || @post.video_url
+    @post.video_url = cloudinary_url || @post.video_url
     @post.price = params[:price] || @post.price
     @post.location = params[:location] || @post.location
     if @post.save
