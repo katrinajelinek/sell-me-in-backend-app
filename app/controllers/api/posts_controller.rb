@@ -27,7 +27,7 @@ class Api::PostsController < ApplicationController
     if @post.save
       if params[:category_ids]
         #remove eval on frontend build
-        params[:category_ids].each do |category_id|
+        eval(params[:category_ids]).each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
         end
       end
