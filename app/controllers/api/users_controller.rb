@@ -23,6 +23,8 @@ class Api::UsersController < ApplicationController
       password_confirmation: params[:password_confirmation],
     )
     if @user.save
+      #trigger welcome email
+      UserMailer.with(user: @user).welcome_email.deliver_now
       render "show.json.jb"
     else
       render json: { errors: @user.errors.full_messages }, status: :bad_request
