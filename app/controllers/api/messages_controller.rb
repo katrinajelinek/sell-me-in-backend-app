@@ -12,6 +12,7 @@ class Api::MessagesController < ApplicationController
       message: params[:message],
     )
     if @message.save
+      MessageMailer.with(user: @message.user, message: @message).message_email.deliver_now
       render "show.json.jb"
     else
       render json: { errors: @message.errors.full_messages }, status: :bad_request
