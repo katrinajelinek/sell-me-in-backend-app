@@ -6,4 +6,5 @@
   video_url: post.video_url,
   price: post.price,
   location: post.location,
+  bought: post.bought,
 }
