@@ -38,12 +38,17 @@ class Api::PostsController < ApplicationController
   end
 
   def update
+    if params[:video]
+      response = Cloudinary::Uploader.upload(params[:video], resource_type: :auto)
+      cloudinary_url = response["secure_url"]
+    end
     @post = Post.find(params[:id])
     @post.title = params[:title] || @post.title
     @post.description = params[:description] || @post.description
     @post.video_url = cloudinary_url || @post.video_url
     @post.price = params[:price] || @post.price
     @post.location = params[:location] || @post.location
+    @post.bought = params[:bought] || @post.bought
     if @post.save
       if params[:category_ids]
         @post.post_categories.destroy_all
