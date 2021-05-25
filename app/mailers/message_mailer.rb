@@ -3,8 +3,8 @@ class MessageMailer < ApplicationMailer
 
   def message_email()
     @user = params[:user]
-    # @seller = params[:seller]
-    # @message = params[:message]
-    mail(to: @user.email, subject: "Someone wants to buy your item!")
+    @post_creator = params[:post_creator]
+    @message = params[:message]
+    mail(to: @post_creator.email, subject: "Someone wants to buy from you!")
   end
 end

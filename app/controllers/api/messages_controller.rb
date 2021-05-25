@@ -11,8 +11,9 @@ class Api::MessagesController < ApplicationController
       user_id: current_user.id,
       message: params[:message],
     )
+    @post_creator = User.find(params[:post_creator])
     if @message.save
-      MessageMailer.with(user: @message.user, message: @message).message_email.deliver_now
+      MessageMailer.with(user: @message.user, message: @message, post_creator: @post_creator).message_email.deliver_now
       render "show.json.jb"
     else
       render json: { errors: @message.errors.full_messages }, status: :bad_request
