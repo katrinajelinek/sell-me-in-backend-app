@@ -43,3 +43,4 @@ gem 'rack-cors'
 gem 'jb'
 gem 'jwt'
 gem 'cloudinary'
+gem 'dotenv-rails', :groups => [:development, :test]
