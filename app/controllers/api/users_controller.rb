@@ -10,6 +10,8 @@ class Api::UsersController < ApplicationController
     if params[:image]
       response = Cloudinary::Uploader.upload(params[:image], resource_type: :auto)
       cloudinary_url = response["secure_url"]
+    else
+      cloudinary_url = "https://images.unsplash.com/photo-1624916888948-7015aa2b25b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     end
     @user = User.new(
       username: params[:username],

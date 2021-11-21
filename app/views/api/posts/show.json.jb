@@ -1,5 +1,5 @@
 post_hash = render partial: "post.json.jb", locals: { post: @post }
-post_hash[:user] = { username: @post.user.username }
+post_hash[:user] = { username: @post.user.username, image_url: @post.user.image_url }
 post_hash[:images] = @post.images.map do |image|
   render partial: "api/images/image.json.jb", locals: { image: image }
 end
