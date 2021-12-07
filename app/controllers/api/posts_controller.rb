@@ -12,15 +12,15 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    if params[:video]
-      response = Cloudinary::Uploader.upload(params[:video], resource_type: :auto)
-      cloudinary_url = response["secure_url"]
-    end
+    # if params[:video]
+    #   response = Cloudinary::Uploader.upload(params[:video], resource_type: :auto)
+    #   cloudinary_url = response["secure_url"]
+    # end
     @post = Post.new(
       user_id: current_user.id,
       title: params[:title],
       description: params[:description],
-      video_url: cloudinary_url,
+      video_url: params[:video],
       price: params[:price],
       location: params[:location],
     )
@@ -29,6 +29,12 @@ class Api::PostsController < ApplicationController
         #remove eval on frontend build
         eval(params[:category_ids]).each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
+        end
+      end
+      if params[:image_urls]
+        #remove eval on frontend build
+        eval(params[:image_urls]).each do |image_url|
+          Image.create(post_id: @post.id, image_url: image_url)
         end
       end
       render "show.json.jb"
@@ -52,9 +58,13 @@ class Api::PostsController < ApplicationController
     if @post.save
       if params[:category_ids]
         @post.post_categories.destroy_all
-        #remove eval on frontend build
-        params[:category_ids].each do |category_id|
+        eval(params[:category_ids]).each do |category_id|
           PostCategory.create(post_id: @post.id, category_id: category_id)
+        end
+      end
+      if params[:image_urls]
+        eval(params[:image_urls]).each do |image_url|
+          Image.create(post_id: @post.id, image_url: image_url)
         end
       end
       render "show.json.jb"
