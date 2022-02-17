@@ -4,6 +4,7 @@
   first_name: user.first_name,
   last_name: user.last_name,
   email: user.email,
+  location: user.location,
   image_url: user.image_url,
   disclaimer_agreement: user.disclaimer_agreement,
   terms_and_conditions_agreement: user.terms_and_conditions_agreement,

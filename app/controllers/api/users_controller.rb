@@ -18,6 +18,7 @@ class Api::UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
+      location: params[:location],
       image_url: cloudinary_url,
       disclaimer_agreement: params[:disclaimer_agreement],
       terms_and_conditions_agreement: params[:terms_and_conditions_agreement],
@@ -51,6 +52,7 @@ class Api::UsersController < ApplicationController
         )
       end
     end
+    @user.location = params[:location] || @user.location
     @user.image_url = cloudinary_url || @user.image_url
     @user.disclaimer_agreement = params[:disclaimer_agreement] || @user.disclaimer_agreement
     @user.terms_and_conditions_agreement = params[:terms_and_conditions_agreement] || @user.terms_and_conditions_agreement
