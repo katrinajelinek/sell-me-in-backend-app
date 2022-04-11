@@ -45,3 +45,5 @@ gem 'jwt'
 gem 'cloudinary'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'seed_dump'
+
+gem 'rails_12factor', group: :production
