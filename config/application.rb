@@ -19,6 +19,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+config.action_mailer.default_url_options = { :host => "localhost:3000", protocol: "http" }
+
 module SellMeInBackendApp
   class Application < Rails::Application
     config.generators.assets = false
